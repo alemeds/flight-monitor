@@ -10,6 +10,9 @@ Una aplicación web construida con Streamlit para monitorear precios de vuelos a
 - **Análisis visual**: Gráficos de tendencias y estadísticas de precios
 - **Precio objetivo**: Define tu presupuesto y recibe alertas cuando se alcance
 - **Historial completo**: Seguimiento de la evolución de precios
+- **🛒 NUEVO: Enlaces de compra inteligentes** - Compra vuelos en 1 clic
+- **APIs reales**: Integración con Amadeus y Skyscanner para datos precisos
+- **Comparación automática**: Ve precios en múltiples plataformas
 
 ## 🎯 Demo en Vivo
 
@@ -162,6 +165,12 @@ DATABASE_URL = "sqlite:///flight_prices.db"
 - Visualiza evolución de precios
 - Identifica mejores momentos para comprar
 - Compara entre diferentes fechas
+
+### 4. Compra Inteligente 🆕
+- **Enlaces automáticos** a Google Flights, Skyscanner, Kayak
+- **Comparación instantánea** en múltiples plataformas
+- **Alertas de precio objetivo** alcanzado
+- **Consejos de compra** personalizados
 
 ## 🔧 Personalización
 
