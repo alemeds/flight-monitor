@@ -348,6 +348,13 @@ def main():
                     if result:
                         flight = result['flight_result']
                         st.info(f"💰 Primer precio encontrado: ${flight['price']} USD - {flight['airline']}")
+                        
+                        # Mostrar opciones de compra inmediatamente
+                        try:
+                            from booking_helper import add_booking_functionality_to_search_result
+                            add_booking_functionality_to_search_result(result, search_data)
+                        except ImportError:
+                            st.info("💡 Para opciones de compra, descarga booking_helper.py")
                 
                 time.sleep(1)
                 st.rerun()
@@ -383,6 +390,21 @@ def main():
                                         st.success(f"📉 ¡Nuevo precio más bajo! ${flight['price']}")
                                     else:
                                         st.info(f"💰 Precio actual: ${flight['price']}")
+                                    
+                                    # Mostrar opciones de compra para precios interesantes
+                                    if result['meets_target'] or result['is_lowest']:
+                                        try:
+                                            from booking_helper import add_booking_functionality_to_search_result
+                                            search_data_dict = {
+                                                'origin': search['origin'],
+                                                'destination': search['destination'],
+                                                'departure_date': search['departure_date'],
+                                                'return_date': search['return_date'],
+                                                'passengers': search['passengers']
+                                            }
+                                            add_booking_functionality_to_search_result(result, search_data_dict)
+                                        except ImportError:
+                                            st.info("💡 Descarga booking_helper.py para opciones de compra automáticas")
                     
                     with col3:
                         if st.button(f"📊 Ver Historial", key=f"history_{search['id']}"):
@@ -677,6 +699,15 @@ def main():
                                 st.metric("Fuente", result.get('source', 'API'))
                             
                             st.success(f"✅ {result['flight_details']}")
+                            
+                            # Opción de compra rápida
+                            if st.button("🛒 ¿Comprar este vuelo?", key="quick_buy"):
+                                try:
+                                    from booking_helper import FlightBookingHelper
+                                    booking_helper = FlightBookingHelper()
+                                    booking_helper.show_booking_widget(result, test_search_data)
+                                except ImportError:
+                                    st.info("💡 Descarga booking_helper.py para funcionalidad completa de compra")
                         else:
                             st.error("No se encontraron vuelos")
     
